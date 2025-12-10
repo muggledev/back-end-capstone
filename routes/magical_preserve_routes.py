@@ -2,7 +2,9 @@ from flask import Blueprint
 
 import controllers.magical_preserve_controller as controllers
 
+
 magical_preserves = Blueprint("magical_preserves", __name__)
+
 
 @magical_preserves.route("/preserve", methods=["POST"])
 def create_preserve_route():
