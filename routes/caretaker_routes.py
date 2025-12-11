@@ -11,7 +11,7 @@ def create_caretaker_route():
     return controllers.create_caretaker()
 
 @caretakers.route("/caretakers", methods=["GET"])
-def get_caretakers_route():
+def get_all_caretakers_route():
     return controllers.get_all_caretakers()
 
 @caretakers.route("/caretaker/<caretaker_id>", methods=["GET"])
