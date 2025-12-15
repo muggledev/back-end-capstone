@@ -34,3 +34,4 @@ class CaretakersSchema(ma.Schema):
     is_active = ma.fields.Bool()
 
 caretaker_schema = CaretakersSchema()
+caretakers_schema = CaretakersSchema(many=True)

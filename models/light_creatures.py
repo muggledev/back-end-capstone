@@ -32,3 +32,4 @@ class LightCreaturesSchema(ma.Schema):
     danger_level = ma.fields.Int()
 
 light_creature_schema = LightCreaturesSchema()
+light_creatures_schema = LightCreaturesSchema(many=True)

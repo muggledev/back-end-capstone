@@ -30,3 +30,4 @@ class ArtifactsSchema(ma.Schema):
     preserves = ma.fields.Nested('MagicalPreservesSchema', many=True, allow_none=True)
 
 artifact_schema = ArtifactsSchema()
+artifacts_schema = ArtifactsSchema(many=True)

@@ -36,3 +36,4 @@ class UsersSchema(ma.Schema):
     tokens = ma.fields.Nested('AuthTokenSchema', many=True, allow_none=True)
 
 user_schema = UsersSchema()
+users_schema = UsersSchema(many=True)

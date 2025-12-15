@@ -29,3 +29,4 @@ class DarkCreaturesSchema(ma.Schema):
     containment_status = ma.fields.Str()
 
 dark_creature_schema = DarkCreaturesSchema()
+dark_creatures_schema = DarkCreaturesSchema(many=True)

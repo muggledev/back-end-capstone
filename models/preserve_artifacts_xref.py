@@ -27,3 +27,4 @@ class PreserveArtifactsXrefSchema(ma.Schema):
     protection_level = ma.fields.Int()
 
 preserve_artifacts_xref_schema = PreserveArtifactsXrefSchema()
+preserve_artifacts_xref_schemas = PreserveArtifactsXrefSchema(many=True)
