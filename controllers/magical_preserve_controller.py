@@ -9,12 +9,17 @@ from uuid import UUID
 
 @authenticate
 def create_preserve():
-    data = request.json if request.json else request.form
+    post_data = request.form if request.form else request.json
+
+    new_preserve = MagicalPreserves.new_magical_preserves_obj()
+    populate_object(new_preserve, post_data)
+
+    
     preserve = MagicalPreserves(
-        preserve_name=data.get("preserve_name"),
-        location=data.get("location"),
-        status=data.get("status"),
-        founded_date=data.get("founded_date")
+        preserve_name=post_data.get("preserve_name"),
+        location=post_data.get("location"),
+        status=post_data.get("status"),
+        founded_date=post_data.get("founded_date")
     )
     try:
         db.session.add(preserve)

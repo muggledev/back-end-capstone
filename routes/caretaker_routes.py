@@ -22,6 +22,6 @@ def get_caretaker_by_id_route(caretaker_id):
 def update_caretaker_route(caretaker_id):
     return controllers.update_caretaker(caretaker_id)
 
-@caretakers.route("/caretaker/<caretaker_id>/delete", methods=["DELETE"])
+@caretakers.route("/caretaker/delete/<caretaker_id>", methods=["DELETE"])
 def delete_caretaker_route(caretaker_id):
     return controllers.delete_caretaker(caretaker_id)

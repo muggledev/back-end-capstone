@@ -10,7 +10,7 @@ from lib.authenticate import authenticate, authenticate_return_auth
 def create_light_creature():
     post_data = request.form if request.form else request.json
 
-    new_creature = LightCreatures()
+    new_creature = LightCreatures.new_light_creatures_obj()
     populate_object(new_creature, post_data)
 
     try:

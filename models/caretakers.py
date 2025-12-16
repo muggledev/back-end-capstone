@@ -13,7 +13,8 @@ class Caretakers(db.Model):
     joined_date = db.Column(db.DateTime)
     is_active = db.Column(db.Boolean, default=True)
 
-    preserve = db.relationship("MagicalPreserves", backref="caretakers")
+    preserve = db.relationship("MagicalPreserves", back_populates="caretakers")
+    user = db.relationship("Users", uselist=False, back_populates="caretaker")
 
     def __init__(self, user_id, preserve_id, caretaker_name, joined_date, is_active=True):
         self.user_id = user_id
@@ -22,16 +23,19 @@ class Caretakers(db.Model):
         self.joined_date = joined_date
         self.is_active = is_active
 
+    def new_caretakers_obj():
+        return Caretakers('', '', '', '', True)
+
 class CaretakersSchema(ma.Schema):
     class Meta:
         fields = ['caretaker_id', 'user', 'preserve', 'caretaker_name', 'joined_date', 'is_active']
 
-    user = ma.fields.Nested('UsersSchema', allow_none=True)
-    preserve = ma.fields.Nested('MagicalPreservesSchema', allow_none=True)
+    user = ma.fields.Nested('UsersSchema', exclude=['caretaker'])
+    preserve = ma.fields.Nested('MagicalPreservesSchema', exclude=['caretakers'])
     caretaker_id = ma.fields.UUID()
-    caretaker_name = ma.fields.Str()
+    caretaker_name = ma.fields.String()
     joined_date = ma.fields.DateTime()
-    is_active = ma.fields.Bool()
+    is_active = ma.fields.Boolean()
 
 caretaker_schema = CaretakersSchema()
 caretakers_schema = CaretakersSchema(many=True)

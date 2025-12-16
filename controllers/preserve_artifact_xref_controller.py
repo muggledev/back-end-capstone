@@ -7,10 +7,10 @@ from lib.authenticate import authenticate, authenticate_return_auth
 
 
 @authenticate
-def create_preserve_artifact():
+def create_preserve_artifact_xref():
     post_data = request.form if request.form else request.json
 
-    new_xref = PreserveArtifactsXref()
+    new_xref = PreserveArtifactsXref.new_preserveartifactsxref_obj()
     populate_object(new_xref, post_data)
 
     try:
@@ -27,13 +27,13 @@ def create_preserve_artifact():
 
 
 @authenticate
-def get_all_preserve_artifacts():
+def get_all_preserve_artifacts_xref():
     xrefs = db.session.query(PreserveArtifactsXref).all()
     return jsonify({"preserve_artifacts": preserve_artifacts_xref_schemas.dump(xrefs)}), 200
 
 
 @authenticate_return_auth
-def get_preserve_artifact_by_id(preserve_id, artifact_id, auth_info):
+def get_preserve_artifact_xref_by_id(preserve_id, artifact_id, auth_info):
     xref = db.session.query(PreserveArtifactsXref).filter(
         PreserveArtifactsXref.preserve_id == preserve_id,
         PreserveArtifactsXref.artifact_id == artifact_id
@@ -46,7 +46,7 @@ def get_preserve_artifact_by_id(preserve_id, artifact_id, auth_info):
 
 
 @authenticate_return_auth
-def update_preserve_artifact(preserve_id, artifact_id, auth_info):
+def update_preserve_artifact_xref(preserve_id, artifact_id, auth_info):
     post_data = request.form if request.form else request.json
 
     xref = db.session.query(PreserveArtifactsXref).filter(
@@ -72,7 +72,7 @@ def update_preserve_artifact(preserve_id, artifact_id, auth_info):
 
 
 @authenticate_return_auth
-def delete_preserve_artifact(preserve_id, artifact_id, auth_info):
+def delete_preserve_artifact_xref(preserve_id, artifact_id, auth_info):
     xref = db.session.query(PreserveArtifactsXref).filter(
         PreserveArtifactsXref.preserve_id == preserve_id,
         PreserveArtifactsXref.artifact_id == artifact_id

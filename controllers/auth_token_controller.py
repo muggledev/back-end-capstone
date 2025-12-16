@@ -10,20 +10,16 @@ from lib.authenticate import authenticate
 
 def create_auth_token():
     post_data = request.form if request.form else request.json
+    email = post_data.get('email')
 
-    user_id = post_data.get("user_id")
-
-    if not user_id:
-        return jsonify({"message": "user_id is required"}), 400
-
-    user = db.session.query(Users).filter(Users.user_id == user_id).first()
+    user = db.session.query(Users).filter(Users.email == email).first()
 
     if not user:
         return jsonify({"message": "user not found"}), 404
 
     expiration = datetime.now() + timedelta(hours=24)
 
-    new_token = AuthTokens(user_id=user_id, expiration=expiration)
+    new_token = AuthTokens(user_id=user.user_id, expiration=expiration)
 
     try:
         db.session.add(new_token)

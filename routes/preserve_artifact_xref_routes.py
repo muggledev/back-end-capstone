@@ -14,14 +14,14 @@ def create_preserve_artifact_xref_route():
 def get_all_preserve_artifacts_xref_route():
     return controllers.get_all_preserve_artifacts_xref()
 
-@preserve_artifacts_xref.route("/preserve_artifact_xref/<preserve_artifact_xref_id>", methods=["GET"])
-def get_preserve_artifact_xref_by_id_route(preserve_artifact_xref_id):
-    return controllers.get_preserve_artifact_xref_by_id(preserve_artifact_xref_id)
+@preserve_artifacts_xref.route("/preserve_artifact_xref/<preserve_id>/<artifact_id>", methods=["GET"])
+def get_preserve_artifact_xref_by_id_route(preserve_id, artifact_id):
+    return controllers.get_preserve_artifact_xref_by_id(preserve_id, artifact_id)
 
-@preserve_artifacts_xref.route("/preserve_artifact_xref/<preserve_artifact_xref_id>", methods=["PUT"])
-def update_preserve_artifact_xref_route(preserve_artifact_xref_id):
-    return controllers.update_preserve_artifact_xref(preserve_artifact_xref_id)
+@preserve_artifacts_xref.route("/preserve_artifact_xref/<preserve_id>/<artifact_id>", methods=["PUT"])
+def update_preserve_artifact_xref_route(preserve_id, artifact_id):
+    return controllers.update_preserve_artifact_xref(preserve_id, artifact_id)
 
-@preserve_artifacts_xref.route("/preserve_artifact_xref/delete/<preserve_artifact_xref_id>", methods=["DELETE"])
-def delete_preserve_artifact_xref_route(preserve_artifact_xref_id):
-    return controllers.delete_preserve_artifact_xref(preserve_artifact_xref_id)
+@preserve_artifacts_xref.route("/preserve_artifact_xref/delete/<preserve_id>/<artifact_id>", methods=["DELETE"])
+def delete_preserve_artifact_xref_route(preserve_id, artifact_id):
+    return controllers.delete_preserve_artifact_xref(preserve_id, artifact_id)

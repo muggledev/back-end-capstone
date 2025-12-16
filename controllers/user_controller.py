@@ -6,12 +6,12 @@ from models.users import Users, user_schema, users_schema
 from lib.authenticate import authenticate, authenticate_return_auth
 from util.reflection import populate_object
 
-@authenticate
+
 def create_user():
     post_data = request.form if request.form else request.json
     new_user = Users.new_user_obj()
     populate_object(new_user, post_data)
-    new_user.password = generate_password_hash(new_user.password).decode('utf8')
+    new_user.password_hash = generate_password_hash(new_user.password_hash).decode('utf8')
 
     try:
         db.session.add(new_user)
@@ -48,7 +48,7 @@ def update_user(user_id, auth_info):
         return jsonify({"message": "not authorized"}), 403
 
     if post_data.get('password'):
-        user.password = generate_password_hash(post_data.get('password')).decode('utf8')
+        user.password_hash = generate_password_hash(post_data.get('password')).decode('utf8')
 
     populate_object(user, post_data)
     db.session.commit()

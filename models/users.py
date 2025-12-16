@@ -13,8 +13,8 @@ class Users(db.Model):
     role = db.Column(db.String(50), nullable=False, default="user")
     is_active = db.Column(db.Boolean, default=True)
 
-    caretaker = db.relationship("Caretakers", uselist=False, backref="user")
-    tokens = db.relationship("AuthTokens", backref="user")
+    caretaker = db.relationship("Caretakers", uselist=False, back_populates="user")
+    tokens = db.relationship("AuthTokens", back_populates="user")
 
     def __init__(self, username, email, password_hash, role="user", is_active=True):
         self.username = username
@@ -23,17 +23,19 @@ class Users(db.Model):
         self.role = role
         self.is_active = is_active
 
+    def new_user_obj():
+        return Users('', '', '', 'user', True)
+
 class UsersSchema(ma.Schema):
     class Meta:
-        fields = ['user_id', 'username', 'email', 'role', 'is_active', 'caretaker', 'tokens']
+        fields = ['user_id', 'username', 'email', 'role', 'is_active', 'caretaker']
 
     user_id = ma.fields.UUID()
-    username = ma.fields.Str()
-    email = ma.fields.Str()
-    role = ma.fields.Str()
-    is_active = ma.fields.Bool()
-    caretaker = ma.fields.Nested('CaretakersSchema', allow_none=True)
-    tokens = ma.fields.Nested('AuthTokenSchema', many=True, allow_none=True)
+    username = ma.fields.String()
+    email = ma.fields.String()
+    role = ma.fields.String()
+    is_active = ma.fields.Boolean()
+    caretaker = ma.fields.Nested('CaretakersSchema', exclude=['user'])
 
 user_schema = UsersSchema()
 users_schema = UsersSchema(many=True)

@@ -10,7 +10,7 @@ from lib.authenticate import authenticate, authenticate_return_auth
 def create_artifact():
     post_data = request.form if request.form else request.json
 
-    new_artifact = Artifacts()
+    new_artifact = Artifacts.new_artifacts_obj()
     populate_object(new_artifact, post_data)
 
     try:

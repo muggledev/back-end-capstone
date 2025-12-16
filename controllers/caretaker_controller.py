@@ -10,7 +10,7 @@ from lib.authenticate import authenticate, authenticate_return_auth
 def create_caretaker():
     post_data = request.form if request.form else request.json
 
-    new_caretaker = Caretakers()
+    new_caretaker = Caretakers.new_caretakers_obj()
     populate_object(new_caretaker, post_data)
 
     try:
